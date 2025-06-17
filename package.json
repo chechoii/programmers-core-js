@@ -1,0 +1,27 @@
+{
+  "name": "programmers-core",
+  "version": "0.0.1",
+  "description": "자바스크립트 코어를 학습하기 위한 문서입니다.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "live-server client --host=localhost --port=5500 --no-browser",
+    "serve": "node server/index.js"
+  },
+  "keywords": [
+    "javascript",
+    "core",
+    "fetch",
+    "XMLHttpRequest",
+    "function"
+  ],
+  "author": "범쌤",
+  "license": "MIT",
+  "type": "commonjs",
+  "devDependencies": {
+    "@eslint/js": "9.27.0",
+    "eslint": "9.27.0",
+    "globals": "16.2.0",
+    "live-server": "1.2.2",
+    "prettier": "3.5.3"
+  }
+}
