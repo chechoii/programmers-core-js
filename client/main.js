@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 95ef3c708ae24c6b7fab9c115af87e24dc931f62
 // const rollingButton = buttons[0];
 // const recordButton = buttons[1];
 // const resetButton = buttons[2];
@@ -63,6 +68,13 @@ const [rollingButton, recordButton, resetButton] = document.querySelectorAll(
 );
 const recordListWrapper = getNode('.recordListWrapper');
 
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 95ef3c708ae24c6b7fab9c115af87e24dc931f62
 let count = 0;
 let total = 0;
 
@@ -101,12 +113,20 @@ const handleRollingDice = (() => {
   };
 })();
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 95ef3c708ae24c6b7fab9c115af87e24dc931f62
 function handleRecord() {
   recordListWrapper.hidden = false;
   renderRecordItem();
   endScroll(recordListWrapper);
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 95ef3c708ae24c6b7fab9c115af87e24dc931f62
 function handleReset() {
   recordListWrapper.hidden = true;
   clearContents('tbody');
@@ -117,3 +137,16 @@ function handleReset() {
 rollingButton.addEventListener('click', handleRollingDice);
 recordButton.addEventListener('click', handleRecord);
 resetButton.addEventListener('click', handleReset);
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+
+
+
+>>>>>>> 95ef3c708ae24c6b7fab9c115af87e24dc931f62
