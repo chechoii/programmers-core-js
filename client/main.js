@@ -1,10 +1,3 @@
-import { diceAnimation, getNode, attr, insertLast } from './lib/index.js';
-
-const [rollingButton, recordButton, resetButton] = document.querySelectorAll(
-  '.buttonGroup button'
-);
-const recordListWrapper = getNode('.recordListWrapper');
-
 // const rollingButton = buttons[0];
 // const recordButton = buttons[1];
 // const resetButton = buttons[2];
@@ -55,27 +48,38 @@ const recordListWrapper = getNode('.recordListWrapper');
 
 */
 
+import {
+  memo,
+  attr,
+  getNode,
+  endScroll,
+  insertLast,
+  clearContents,
+  diceAnimation,
+} from './lib/index.js';
+
+const [rollingButton, recordButton, resetButton] = document.querySelectorAll(
+  '.buttonGroup button'
+);
+const recordListWrapper = getNode('.recordListWrapper');
+
 let count = 0;
 let total = 0;
 
-function createItem(value){
-  
+function createItem(value) {
   return `
     <tr>
       <td>${++count}</td>
       <td>${value}</td>
-      <td>${total += value}</td>
+      <td>${(total += value)}</td>
     </tr>
-  `
+  `;
 }
 
-function renderRecordItem(){
-  
-  const diceNumber = +attr('#cube','dice');
+function renderRecordItem() {
+  const diceNumber = +attr(memo('cube'), 'dice');
 
-
-  insertLast('tbody',createItem(diceNumber));
-  recordListWrapper.scrollTop = recordListWrapper.scrollHeight
+  insertLast('tbody', createItem(diceNumber));
 }
 
 const handleRollingDice = (() => {
@@ -95,32 +99,21 @@ const handleRollingDice = (() => {
 
     isClicked = !isClicked;
   };
-})()
+})();
 
-
-function handleRecord(){
+function handleRecord() {
   recordListWrapper.hidden = false;
   renderRecordItem();
+  endScroll(recordListWrapper);
 }
 
-function handleReset(){
+function handleReset() {
   recordListWrapper.hidden = true;
+  clearContents('tbody');
+  count = 0;
+  total = 0;
 }
 
 rollingButton.addEventListener('click', handleRollingDice);
-recordButton.addEventListener('click',handleRecord)
-resetButton.addEventListener('click',handleReset)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+recordButton.addEventListener('click', handleRecord);
+resetButton.addEventListener('click', handleReset);
