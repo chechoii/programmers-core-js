@@ -19,8 +19,8 @@ import {
       - insertLast
 */
 
+/* renderUserList() */
 const userCardInner = getNode('.user-card-inner');
-
 async function renderUserList() {
   renderSpinner(userCardInner);
 
@@ -60,6 +60,7 @@ async function renderUserList() {
 
 renderUserList();
 
+/* handleDelete */
 function handleDelete(e) {
   const button = e.target.closest('button');
 
@@ -81,6 +82,7 @@ const createButton = getNode('.create');
 const cancelButton = getNode('.create .cancel');
 const doneButton = getNode('.create .done');
 
+/* handleCreate */
 function handleCreate() {
   const pop = getNode('.pop');
 
@@ -90,11 +92,13 @@ function handleCreate() {
   gsap.to(pop, { autoAlpha: 1 });
 }
 
+/* handleCancel */
 function handleCancel(e) {
   e.stopPropagation();
   gsap.to('.create .pop', { autoAlpha: 0 });
 }
 
+/* handleDone */
 function handleDone(e) {
   e.preventDefault();
 
@@ -121,15 +125,18 @@ const registerButton = getNode('.register');
 const registerCancelButton = getNode('.register .cancel');
 const registerDoneButton = getNode('.register .done');
 
+/* handleRegister */
 function handleRegister() {
   gsap.to('.register .pop', { autoAlpha: 1 });
 }
 
+/* handleRegisterCancel */
 function handleRegisterCancel(e) {
   e.stopPropagation();
   gsap.to('.register .pop', { autoAlpha: 0 });
 }
 
+// handleRegisterCreate
 function handleRegisterCreate(e) {
   e.preventDefault();
 
@@ -146,6 +153,7 @@ registerButton.addEventListener('click', handleRegister);
 registerCancelButton.addEventListener('click', handleRegisterCancel);
 registerDoneButton.addEventListener('click', handleRegisterCreate);
 
+/* isLogin */
 const isLogin = await tiger.post('http://localhost:3000/login', {
   email: 'tiger@gmail.com',
   password: '123123',
