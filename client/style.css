@@ -116,3 +116,148 @@ h2 {
 .user-resouce-info > div:last-child {
   margin-bottom: 0;
 }
+
+.create {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  border-radius: 1.5rem;
+  background-color: dodgerblue;
+  padding: 0.5rem;
+  z-index: 99999;
+
+  & button {
+    color: white;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .pop {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #0000008d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    backdrop-filter: blur(5px);
+    visibility: hidden;
+    opacity: 0;
+    /* transition: all .5s; */
+
+    & form {
+      padding: 2rem;
+      background: white;
+      border-radius: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 4px 6px 11px 3px #0000007d;
+
+      & div {
+        padding: 0.5rem;
+
+        & label {
+          display: inline-block;
+          min-width: 80px;
+        }
+
+        & button {
+          padding: 0.5rem;
+          border-radius: 0.5rem;
+          cursor: pointer;
+          transition: transform 0.2s;
+        }
+
+        & button:hover {
+          transform: translate(1px, 1px);
+        }
+
+        & button[type='button'] {
+          background-color: hotpink;
+        }
+
+        & button[type='submit'] {
+          background-color: dodgerblue;
+        }
+      }
+    }
+  }
+}
+
+.register {
+  position: absolute;
+  right: 1rem;
+
+  top: 1rem;
+  border-radius: 1.5rem;
+  background-color: dodgerblue;
+  padding: 0.5rem;
+  z-index: 99999;
+
+  & button {
+    color: white;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .pop {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #0000008d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    backdrop-filter: blur(5px);
+    visibility: hidden;
+    opacity: 0;
+    /* transition: all .5s; */
+
+    & form {
+      padding: 2rem;
+      background: white;
+      border-radius: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 4px 6px 11px 3px #0000007d;
+
+      & div {
+        padding: 0.5rem;
+
+        & label {
+          display: inline-block;
+          min-width: 80px;
+        }
+
+        & button {
+          padding: 0.5rem;
+          border-radius: 0.5rem;
+          cursor: pointer;
+          transition: transform 0.2s;
+        }
+
+        & button:hover {
+          transform: translate(1px, 1px);
+        }
+
+        & button[type='button'] {
+          background-color: hotpink;
+        }
+
+        & button[type='submit'] {
+          background-color: dodgerblue;
+        }
+      }
+    }
+  }
+}

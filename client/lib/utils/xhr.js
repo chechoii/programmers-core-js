@@ -1,4 +1,4 @@
-export const END_POINT = 'https://jsonplaceholder.typicode.com/users';
+export const END_POINT = 'http://localhost:3000/posts';
 
 /* 
   [readyState]
@@ -134,7 +134,7 @@ const defaultOptions = {
   headers: {
     //데이터의 사용 설명서
     'Content-Type': 'application/json',
-    'Acess-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': '*',
   },
 };
 

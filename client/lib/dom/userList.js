@@ -304,7 +304,10 @@ export function renderEmptyCard(target) {
 }
 
 export function renderUserCard(target, data) {
-  insertLast(target, createUserCard(data));
+  insertLast(
+    target,
+    createUserCard(data.id, data.name, data.email, data.website)
+  );
 }
 
 export function renderSpinner(target) {
