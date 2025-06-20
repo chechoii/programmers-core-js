@@ -55,76 +55,89 @@ const obj = {
   age: 30,
   email: 'tiger@gmail.com',
 };
-/* 
-xhr({
-  method: 'POST',
-  url: `END_POINT`,
-  success: (data) => {
-    console.log(data);
-  },
-  fail: ({ message }) => {
-    console.log(message);
-  },
-  body: obj,
-}); */
 
 // xhr({
-//   method: 'DELETE',
-//   url: `${END_POINT}/4`,
-//   success: (data) => {
-//     console.log(data);
-//   },
-//   fail: ({ message }) => {
-//     console.log(message);
-//   },
-// });
+//   method:'DELETE',
+//   url:`${END_POINT}/4`,
+//   success: (data)=> console.log(data),
+//   fail: ({message})=> console.log(message),
+// })
 
 // compound pattern
 
-/* xhr.get = (url, success, fail) => {
+// compound component
+
+xhr.get = (url, success, fail) => {
+  xhr({ url, success, fail });
+};
+
+xhr.post = (url, body, success, fail) => {
   xhr({
+    method: 'POST',
     url,
+    body,
     success,
     fail,
   });
 };
 
-xhr.get(
-  END_POINT,
-  (data) => {
-    console.log(data);
-  },
-  () => {}
-); */
+// xhr.post(
+//   END_POINT,
+//   obj,
+//   ()=>{},
+//   ()=>{},
+// )
 
-/* xhr.post = (url, body, success, fail) => {
-  xhr({ method: 'POST', url, body, success, fail });
-}; */
-
-/* xhr.post(
-  END_POINT,
-  obj,
-  () => {},
-  () => {}
-); */
-
-/* xhr.delete = (url, success, fail) => {
+xhr.delete = (url, success, fail) => {
   xhr({ method: 'DELETE', url, success, fail });
 };
 
 xhr.put = (url, body, success, fail) => {
-  xhr({ method: 'PUT', body, success, fail });
+  xhr({
+    method: 'PUT',
+    body,
+    success,
+    fail,
+  });
 };
 
 xhr.patch = (url, body, success, fail) => {
-  xhr({ method: 'PATCH', body, success, fail });
-}; */
+  xhr({
+    method: 'PATCH',
+    body,
+    success,
+    fail,
+  });
+};
 
-/* xhr.delete(
-  `${END_POINT}/3`,
-  () => {},
-  () => {}
-); */
+// xhr.delete(
+//   `${END_POINT}/3`,
+//   ()=>{},
+//   ()=>{},
+// )
+
+// GET, POST, PUT, DELETE
+
+// const _xhr = new XMLHttpRequest()
+
+// _xhr.open('GET',END_POINT);
+
+// console.log( _xhr );
+
+// _xhr.addEventListener('readystatechange',()=>{
+
+//   if(_xhr.readyState === 4){
+
+//     if(_xhr.status >= 200 && _xhr.status < 400){
+
+//       const data = JSON.parse(_xhr.response);
+
+//     }
+//   }
+
+// })
+
+// _xhr.send();
 
 const defaultOptions = {
   method: 'GET',
@@ -132,7 +145,6 @@ const defaultOptions = {
   body: null,
   errorMessage: '서버와의 통신이 원활하지 않습니다.',
   headers: {
-    //데이터의 사용 설명서
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
   },
@@ -154,7 +166,6 @@ export function xhrPromise(options = {}) {
     },
   };
 
-  // const { method, url, headers, body, errorMessage: message } = config;
   const xhr = new XMLHttpRequest();
 
   xhr.open(method, url);
@@ -181,9 +192,15 @@ export function xhrPromise(options = {}) {
   });
 }
 
-xhrPromise({ url: END_POINT }).then((res) => {
-  // console.log(res);
-});
+// xhrPromise({ url:END_POINT})
+// .then(
+// (res)=>{
+//   console.log( res );
+// },
+// (err)=>{
+//   console.log( err );
+
+// })
 
 xhrPromise.get = (url) => xhrPromise({ url });
 xhrPromise.post = (url, body) => xhrPromise({ url, body, method: 'POST' });

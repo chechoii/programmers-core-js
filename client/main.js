@@ -1,14 +1,14 @@
 import {
-  choii,
+  tiger,
   delayP,
   getNode,
   END_POINT,
   insertLast,
   changeColor,
   renderSpinner,
+  clearContents,
   renderUserCard,
   renderEmptyCard,
-  clearContents,
 } from './lib/index.js';
 
 /* 
@@ -27,7 +27,7 @@ async function renderUserList() {
   // await delayP(2000)
 
   try {
-    const { data } = await choii.get(END_POINT);
+    const { data } = await tiger.get(END_POINT);
 
     // getNode('.loadingSpinner').remove();
 
@@ -67,8 +67,8 @@ function handleDelete(e) {
 
   const id = button.dataset.value;
 
-  choii.delete(`${END_POINT}/${id}`).then(() => {
-    alert('삭제가 완료됐습니다');
+  tiger.delete(`${END_POINT}/${id}`).then(() => {
+    alert('삭제가 완료됐습니다!');
 
     clearContents(userCardInner);
     renderUserList();
@@ -83,11 +83,11 @@ const doneButton = getNode('.create .done');
 
 function handleCreate() {
   const pop = getNode('.pop');
+
   // pop.style.opacity = 1;
   // pop.style.visibility = 'initial';
-  gsap.to(pop, {
-    autoAlpha: 1,
-  });
+
+  gsap.to(pop, { autoAlpha: 1 });
 }
 
 function handleCancel(e) {
@@ -98,24 +98,19 @@ function handleCancel(e) {
 function handleDone(e) {
   e.preventDefault();
 
-  const username = getNode('#nameField').value;
+  const name = getNode('#nameField').value;
   const email = getNode('#emailField').value;
   const website = getNode('#siteField').value;
 
-  choii
-    .post(END_POINT, {
-      name,
-      email,
-      website,
-    })
-    .then(() => {
-      gsap.to('.create .pop', { autoAlpha: 0 });
-      clearContents(userCardInner);
-      renderUserList();
-      getNode('#nameField').value = '';
-      getNode('#emailField').value = '';
-      getNode('#siteField').value = '';
-    });
+  tiger.post(END_POINT, { name, email, website }).then(() => {
+    gsap.to('.create .pop', { autoAlpha: 0 });
+    clearContents(userCardInner);
+    renderUserList();
+
+    getNode('#nameField').value = '';
+    getNode('#emailField').value = '';
+    getNode('#siteField').value = '';
+  });
 }
 
 createButton.addEventListener('click', handleCreate);
@@ -141,8 +136,8 @@ function handleRegisterCreate(e) {
   const name = getNode('#create-name').value;
   const password = getNode('#create-password').value;
 
-  choii.post('http://localhost:3000/register', {
-    email: 'mijjn@naver.com',
+  tiger.post('http://localhost:3000/register', {
+    email: 'tiger@gmail.com',
     password: '123123',
   });
 }
@@ -151,9 +146,11 @@ registerButton.addEventListener('click', handleRegister);
 registerCancelButton.addEventListener('click', handleRegisterCancel);
 registerDoneButton.addEventListener('click', handleRegisterCreate);
 
-const isLogin = await choii.post('/http://localhost:3000/login', {
-  email: 'mijjn@naver.com',
+const isLogin = await tiger.post('http://localhost:3000/login', {
+  email: 'tiger@gmail.com',
   password: '123123',
 });
+
+// alert(`${isLogin.data.user.email}님 환영합니다!`)
 
 console.log(isLogin.data);
