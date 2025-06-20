@@ -1,6 +1,6 @@
 import { isString } from '../utils/type.js';
 
-console.log('storage');
+// console.log('storage');
 
 const { localStorage: storage } = window;
 
@@ -45,8 +45,14 @@ export function getStorage(key) {
 //   console.log('done');
 // });
 
-const { name, age } = getStorage('user');
-console.log(name, age);
+// 실행 불가능
+// const { name, age } = getStorage('user');
+// console.log(name, age);
+
+// 실행 가능 getStorage는 비동기(Promise)로 반환 -> .then()으로 데이터를 추출해야함 !! 따라서 구조분해할당 안됨
+getStorage('user').then((data) => {
+  console.log(data.name, data.age);
+});
 
 export function deleteStorage(key) {
   return new Promise((resolve, reject) => {
