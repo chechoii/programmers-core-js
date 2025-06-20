@@ -64,44 +64,36 @@ function fibonacci(n) {
   return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
-
 function debounce(f, limit = 1000) {
   let timeout;
 
   return function (e) {
     clearTimeout(timeout);
     timeout = setTimeout(() => {
-      f.call(this,e)
+      f.call(this, e);
     }, limit);
   };
 }
 
-
 function handleMove(e) {
-  console.log(this,e); 
+  console.log(this, e);
 }
 
 ground.addEventListener('mousemove', throttle(handleMove));
 
-
-
-function throttle(f,limit = 1000){
-  
+function throttle(f, limit = 1000) {
   let wait = false;
 
-  return function(...args) {
-    if(!wait){
-      f.apply(this,args);
+  return function (...args) {
+    if (!wait) {
+      f.apply(this, args);
       wait = true;
-      setTimeout(() => wait = false, limit);
+      setTimeout(() => (wait = false), limit);
     }
-  }
+  };
 }
 
-
-// mousemove, resize, input event 
-
-
+// mousemove, resize, input event
 
 // debounce(() => console.log('hello'),1000)
 // debounce(() => console.log('hello'),1000)
@@ -109,18 +101,9 @@ function throttle(f,limit = 1000){
 
 // throttle debounce
 
-
-
-window.addEventListener('resize',debounce(()=>{
-  console.log('사이즈 계산!');
-  
-}))
-
-
-
-
-
-
-
-
-
+window.addEventListener(
+  'resize',
+  debounce(() => {
+    console.log('사이즈 계산!');
+  })
+);
