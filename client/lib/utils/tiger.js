@@ -1,19 +1,10 @@
-
-
-
-const END_POINT = 'https://jsonplaceholder.typicode.com/users'
-
-
-
-
+const END_POINT = 'https://jsonplaceholder.typicode.com/users';
 
 // const response = await fetch(END_POINT);
-
 
 // if(response.ok){
 //   const data = await response.json();
 // }
-
 
 /* 
   fetch API를 활용한 tiger 함수 만들기
@@ -25,124 +16,88 @@ const END_POINT = 'https://jsonplaceholder.typicode.com/users'
 
 */
 
-
 // const { data } = await tiger({
 //   url:END_POINT,
 //   method:'POST',
 //   body:JSON.stringify(obj)
 // });
 
-
-
-
 // async : 무 조 건 promise object를 리턴하는 함수
 // await : 코드 실행 흐름 제어
 //         result의 값을 꺼낼 수 있다.
 const obj = {
-  name:'tiger',
-  age:30
-}
+  name: 'tiger',
+  age: 30,
+};
 
 const defaultOptions = {
-  method:'GET',
-  url:'',
-  body:null,
-  headers:{
-    'Content-Type':'application/json',
-    'Access-Control-Allow-Origin':'*'
-  }
-}
+  method: 'GET',
+  url: '',
+  body: null,
+  headers: {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+  },
+};
 
 export const tiger = async (options) => {
-
   const { url, ...rest } = {
-    ...defaultOptions, 
+    ...defaultOptions,
     ...options,
-    headers:{
+    headers: {
       ...defaultOptions.headers,
-      ...options.headers
-    }
-  }
+      ...options.headers,
+    },
+  };
 
-  const response = await fetch(url,rest);
+  const response = await fetch(url, rest);
 
-  if(response.ok){
+  if (response.ok) {
     response.data = await response.json();
   }
-  
-  return response ;
-}
 
+  return response;
+};
 
-tiger.get = (url,options) => {
+tiger.get = (url, options) => {
   return tiger({
+    method: 'GET',
     url,
-    ...options
-  })
-}
+    ...options,
+  });
+};
 
-tiger.post = (url,body,options) => {
+tiger.post = (url, body, options) => {
   return tiger({
-    method:'POST',
+    method: 'POST',
     url,
-    body:JSON.stringify(body),
-    ...options
-  })
-}
+    body: JSON.stringify(body),
+    ...options,
+  });
+};
 
-tiger.put = (url,body,options) => {
+tiger.put = (url, body, options) => {
   return tiger({
-    method:'PUT',
+    method: 'PUT',
     url,
-    body:JSON.stringify(body),
-    ...options
-  })
-}
+    body: JSON.stringify(body),
+    ...options,
+  });
+};
 
-tiger.patch = (url,body,options) => {
+tiger.patch = (url, body, options) => {
   return tiger({
-    method:'PATCH',
+    method: 'PATCH',
     url,
-    body:JSON.stringify(body),
-    ...options
-  })
-}
+    body: JSON.stringify(body),
+    ...options,
+  });
+};
 
-tiger.delete = (url,options) => {
+tiger.delete = (url, options) => {
   return tiger({
-    method:'DELETE',
+    method: 'DELETE',
     url,
-    ...options
-  })
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    ...options,
+  });
+};
