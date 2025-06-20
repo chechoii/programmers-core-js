@@ -1,4 +1,4 @@
-const END_POINT = 'https://jsonplaceholder.typicode.com/users';
+export const END_POINT = 'https://jsonplaceholder.typicode.com/users';
 
 /* 
   [readyState]
@@ -97,9 +97,9 @@ xhr.get(
   () => {}
 ); */
 
-xhr.post = (url, body, success, fail) => {
+/* xhr.post = (url, body, success, fail) => {
   xhr({ method: 'POST', url, body, success, fail });
-};
+}; */
 
 /* xhr.post(
   END_POINT,
@@ -108,7 +108,7 @@ xhr.post = (url, body, success, fail) => {
   () => {}
 ); */
 
-xhr.delete = (url, success, fail) => {
+/* xhr.delete = (url, success, fail) => {
   xhr({ method: 'DELETE', url, success, fail });
 };
 
@@ -118,10 +118,75 @@ xhr.put = (url, body, success, fail) => {
 
 xhr.patch = (url, body, success, fail) => {
   xhr({ method: 'PATCH', body, success, fail });
-};
+}; */
 
 /* xhr.delete(
   `${END_POINT}/3`,
   () => {},
   () => {}
 ); */
+
+const defaultOptions = {
+  method: 'GET',
+  url: '',
+  body: null,
+  errorMessage: '서버와의 통신이 원활하지 않습니다.',
+  headers: {
+    //데이터의 사용 설명서
+    'Content-Type': 'application/json',
+    'Acess-Control-Allow-Origin': '*',
+  },
+};
+
+export function xhrPromise(options = {}) {
+  const {
+    method,
+    url,
+    headers,
+    body,
+    errorMessage: message,
+  } = {
+    ...defaultOptions,
+    ...options,
+    headers: {
+      ...defaultOptions.headers,
+      ...options.headers,
+    },
+  };
+
+  // const { method, url, headers, body, errorMessage: message } = config;
+  const xhr = new XMLHttpRequest();
+
+  xhr.open(method, url);
+
+  if (!(method === 'DELETE')) {
+    Object.entries(headers).forEach(([k, v]) => {
+      xhr.setRequestHeader(k, v);
+    });
+  }
+
+  xhr.send(body ? JSON.stringify(body) : null);
+
+  return new Promise((resolve, reject) => {
+    xhr.addEventListener('readystatechange', () => {
+      const { readyState, status, response } = xhr;
+      if (readyState === 4) {
+        if (status >= 200 && status < 400) {
+          resolve(JSON.parse(response));
+        } else {
+          reject({ message });
+        }
+      }
+    });
+  });
+}
+
+xhrPromise({ url: END_POINT }).then((res) => {
+  // console.log(res);
+});
+
+xhrPromise.get = (url) => xhrPromise({ url });
+xhrPromise.post = (url, body) => xhrPromise({ url, body, method: 'POST' });
+xhrPromise.put = (url, body) => xhrPromise({ url, body, method: 'PUT' });
+xhrPromise.patch = (url, body) => xhrPromise({ url, body, method: 'PATCH' });
+xhrPromise.delete = (url) => xhrPromise({ url, method: 'DELETE' });
