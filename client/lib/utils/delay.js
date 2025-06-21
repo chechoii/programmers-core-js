@@ -76,6 +76,12 @@ export function delayP(options) {
   });
 }
 
+const data = delayP();
+
+const b = data.then((res) => {
+  return res;
+});
+
 // delayP()
 // .then(()=>{
 
