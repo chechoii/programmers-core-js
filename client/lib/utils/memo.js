@@ -1,7 +1,7 @@
 // memoization
 
 export const memo = (() => {
-  const cache = {};
+  const cache = {}; // 클로저로 기억되는 변수
 
   return (key, fn) => {
     if (!fn) return cache[key];
