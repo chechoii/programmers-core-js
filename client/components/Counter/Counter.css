@@ -1,0 +1,21 @@
+button {
+  border: none;
+  padding: 0.5rem 0.7rem;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
+.decrement {
+  background-color: dodgerblue;
+}
+
+.increment {
+  background-color: hotpink;
+}
+
+span {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background-color: salmon;
+}
